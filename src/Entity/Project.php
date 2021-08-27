@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProjectRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints\Currency;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
@@ -36,7 +40,7 @@ class Project
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private DateTime $startDate;
+    private $startDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -60,6 +64,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=3, nullable=true)
+     * @Assert\Currency
      */
     private string $currency;
 
@@ -256,5 +261,33 @@ class Project
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set $created
+     *
+     * @param  \DateTime  $createdAt  $created
+     *
+     * @return  self
+     */ 
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set $updated
+     *
+     * @param  \DateTime  $updatedAt  $updated
+     *
+     * @return  self
+     */ 
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }
