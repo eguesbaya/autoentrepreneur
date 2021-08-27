@@ -19,7 +19,7 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         //TODO:
-        // - set required false when an be null
+        // -  resolve issue with startDate: has to be posterior to today, but not when edited
         $builder
             ->add('name', TextType::class)
             ->add('startDate', DateType::class, [
