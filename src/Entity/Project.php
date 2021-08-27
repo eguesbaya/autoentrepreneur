@@ -15,6 +15,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project
 {
+    const STATUS = ['pending', 'in progress', 'submitted', 'invoiced', 'completed'];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -24,21 +26,27 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private string $name;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Type("\DateTimeInterface")
+     * @Assert\GreaterThanOrEqual("today+1")
      */
     private DateTime $endDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
+     * @Assert\Positive
      */
     private float $ratePerHour;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\Type("\DateTimeInterface")
+     * @Assert\GreaterThanOrEqual("today")
      */
     private ?DateTime $startDate;
 
@@ -49,6 +57,9 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(
+     *     message = "{{ value }}' is not a valid email."
+     * )
      */
     private ?string $email;
 
@@ -59,6 +70,7 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Choice(choices=Project::STATUS, message="Choose a valid status.")
      */
     private ?string $status;
 
@@ -70,6 +82,8 @@ class Project
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Positive
+     * 
      */
     private ?float $hoursEstimated;
 

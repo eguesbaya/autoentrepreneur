@@ -28,13 +28,16 @@ class ProjectType extends AbstractType
                 ])
             ->add('endDate', DateType::class, [
                 'widget' => 'single_text',
+                'input' => 'datetime',
                 ])
             ->add('ratePerHour', NumberType::class)
             ->add('currency', CurrencyType::class, [
                 'preferred_choices' => ['EUR', 'GBP', 'USD'],
             ])
             ->add('hoursEstimated', NumberType::class)
-            ->add('totalHours', NumberType::class)
+            ->add('totalHours', NumberType::class, [
+                'required'=> false,
+            ])
             ->add('ratePerHour', NumberType::class)
             ->add('projectOwner', TextType::class, [
                 'required' => false,
