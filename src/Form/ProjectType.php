@@ -33,6 +33,9 @@ class ProjectType extends AbstractType
             ->add('currency', CurrencyType::class, [
                 'preferred_choices' => ['EUR', 'GBP', 'USD'],
             ])
+            ->add('hoursEstimated', NumberType::class)
+            ->add('totalHours', NumberType::class)
+            ->add('ratePerHour', NumberType::class)
             ->add('projectOwner', TextType::class, [
                 'required' => false,
             ])
@@ -57,11 +60,11 @@ class ProjectType extends AbstractType
             ->add('additionalCost', NumberType::class, [
                 'required'=> false
             ])
-            ->add('createdAt' , DateType::class, [
-                'input'  => 'datetime_immutable',
-                'required'=> false
-                ])
-            ->add('updatedAt')
+            // ->add('createdAt' , DateType::class, [
+            //     'input'  => 'datetime_immutable',
+            //     'required'=> false
+            //     ])
+            // ->add('updatedAt')
         ;
     }
 

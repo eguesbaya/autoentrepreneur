@@ -40,54 +40,54 @@ class Project
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private $startDate;
+    private ?DateTime $startDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $projectOwner;
+    private ?string $projectOwner;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private int $telephone;
+    private ?int $telephone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $status;
+    private ?string $status;
 
     /**
      * @ORM\Column(type="string", length=3, nullable=true)
      * @Assert\Currency
      */
-    private string $currency;
+    private ?string $currency;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private float $hoursEstimated;
+    private ?float $hoursEstimated;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private float $priceReduction;
+    private ?float $priceReduction;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private float $additionalCost;
+    private ?float $additionalCost;
 
     /**
      * @var \DateTime $created
      *
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private DateTime $createdAt;
 
@@ -98,6 +98,11 @@ class Project
      * @ORM\Column(type="datetime")
      */
     private DateTime $updatedAt;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private ?float $totalHours;
 
     public function getId(): ?int
     {
@@ -248,7 +253,7 @@ class Project
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -287,6 +292,18 @@ class Project
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getTotalHours(): ?float
+    {
+        return $this->totalHours;
+    }
+
+    public function setTotalHours(?float $totalHours): self
+    {
+        $this->totalHours = $totalHours;
 
         return $this;
     }
