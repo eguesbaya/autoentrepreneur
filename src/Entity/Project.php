@@ -33,7 +33,6 @@ class Project
     /**
      * @ORM\Column(type="date")
      * @Assert\Type("\DateTimeInterface")
-     * @Assert\GreaterThanOrEqual("today+1")
      */
     private DateTime $endDate;
 
@@ -46,7 +45,6 @@ class Project
     /**
      * @ORM\Column(type="date", nullable=true)
      * @Assert\Type("\DateTimeInterface")
-     * @Assert\GreaterThanOrEqual("today")
      */
     private ?DateTime $startDate;
 
