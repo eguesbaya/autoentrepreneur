@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Client</th>
                 <th>EndDate</th>
                 <th>RatePerHour</th>
                 <th>StartDate</th>
@@ -31,6 +32,7 @@
             <tr>
                 <td>{{ project.id }}</td>
                 <td>{{ project.name }}</td>
+                <td>{{ project.client.name }}</td>
                 <td>{{ project.endDate ? project.endDate|date('Y-m-d') : '' }}</td>
                 <td>{{ project.ratePerHour }}</td>
                 <td>{{ project.startDate ? project.startDate|date('Y-m-d') : '' }}</td>
