@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project index{% endblock %}
+
+{% block body %}
+    <h1>Project index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>EndDate</th>
+                <th>RatePerHour</th>
+                <th>StartDate</th>
+                <th>ProjectOwner</th>
+                <th>Email</th>
+                <th>Telephone</th>
+                <th>Status</th>
+                <th>Currency</th>
+                <th>HoursEstimated</th>
+                <th>PriceReduction</th>
+                <th>AdditionalCost</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.id }}</td>
+                <td>{{ project.name }}</td>
+                <td>{{ project.endDate ? project.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ project.ratePerHour }}</td>
+                <td>{{ project.startDate ? project.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ project.projectOwner }}</td>
+                <td>{{ project.email }}</td>
+                <td>{{ project.telephone }}</td>
+                <td>{{ project.status }}</td>
+                <td>{{ project.currency }}</td>
+                <td>{{ project.hoursEstimated }}</td>
+                <td>{{ project.priceReduction }}</td>
+                <td>{{ project.additionalCost }}</td>
+                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
+                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('project_new') }}">Create new</a>
+{% endblock %}
