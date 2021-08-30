@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Client;
 use App\Entity\Project;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -22,6 +24,9 @@ class ProjectType extends AbstractType
         // -  resolve issue with startDate: has to be posterior to today, but not when edited
         $builder
             ->add('name', TextType::class)
+            ->add('client', EntityType::class, [
+                'class' => Client::class,
+            ])
             ->add('startDate', DateType::class, [
                 'widget' => 'single_text',
                 'required' => false,
