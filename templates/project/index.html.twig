@@ -10,19 +10,13 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>EndDate</th>
-                <th>RatePerHour</th>
-                <th>StartDate</th>
-                <th>ProjectOwner</th>
+                <th>End Date</th>
+                <th>Rate Per Hour</th>
+                <th>Project Owner</th>
                 <th>Email</th>
-                <th>Telephone</th>
+                <th>Hours Estimated</th>
+                <th>Amount</th>
                 <th>Status</th>
-                <th>Currency</th>
-                <th>HoursEstimated</th>
-                <th>PriceReduction</th>
-                <th>AdditionalCost</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -31,19 +25,13 @@
             <tr>
                 <td>{{ project.id }}</td>
                 <td>{{ project.name }}</td>
-                <td>{{ project.endDate ? project.endDate|date('Y-m-d') : '' }}</td>
-                <td>{{ project.ratePerHour }}</td>
-                <td>{{ project.startDate ? project.startDate|date('Y-m-d') : '' }}</td>
+                <td>{{ project.endDate ? project.endDate|date('d M Y') : '' }}</td>
+                <td>{{ project.ratePerHour }} {{ project.currency }}</td>
                 <td>{{ project.projectOwner }}</td>
                 <td>{{ project.email }}</td>
-                <td>{{ project.telephone }}</td>
-                <td>{{ project.status }}</td>
-                <td>{{ project.currency }}</td>
                 <td>{{ project.hoursEstimated }}</td>
-                <td>{{ project.priceReduction }}</td>
-                <td>{{ project.additionalCost }}</td>
-                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ project.ratePerHour * project.hoursEstimated }} {{ project.currency }}</td>
+                <td>{{ project.status }}</td>
                 <td>
                     <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
                     <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
