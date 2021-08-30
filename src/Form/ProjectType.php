@@ -26,6 +26,7 @@ class ProjectType extends AbstractType
             ->add('name', TextType::class)
             ->add('client', EntityType::class, [
                 'class' => Client::class,
+                'choice_label' => 'name',
             ])
             ->add('startDate', DateType::class, [
                 'widget' => 'single_text',
