@@ -118,6 +118,12 @@ class Project
      */
     private ?float $totalHours;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -318,6 +324,18 @@ class Project
     public function setTotalHours(?float $totalHours): self
     {
         $this->totalHours = $totalHours;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
