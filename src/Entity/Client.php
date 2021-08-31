@@ -53,6 +53,7 @@ class Client
     * @var File|null
     * @Assert\Image(
     *     maxSize = "2M",
+    *     minWidth = 200,
     *     mimeTypes = {
     *              "image/jpg", "image/jpg",
     *              "image/jpeg", "image/jpeg",
