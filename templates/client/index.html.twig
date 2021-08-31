@@ -9,10 +9,11 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Logo</th>
                 <th>Name</th>
                 <th>Type</th>
                 <th>Comment</th>
-                <th>Photo</th>
+                
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,10 +21,11 @@
         {% for client in clients %}
             <tr>
                 <td>{{ client.id }}</td>
+                <td>{{ client.logoName }}</td>
                 <td>{{ client.name }}</td>
                 <td>{{ client.type }}</td>
                 <td>{{ client.comment }}</td>
-                <td>{{ client.photo }}</td>
+                
                 <td>
                     <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
                     <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>

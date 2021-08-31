@@ -26,8 +26,8 @@ class ClientType extends AbstractType
                 'expanded' => true
             ])
             ->add('comment', TextType::class)
-            ->add('photo')
-            ->add('photoFile', VichFileType::class, [
+            ->add('logoName')
+            ->add('logoFile', VichFileType::class, [
                         'required'      => false,
                         'allow_delete'  => true, // not mandatory, default is true
                         'download_uri' => true, // not mandatory, default is true

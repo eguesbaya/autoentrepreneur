@@ -40,14 +40,14 @@ class Client
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $photo;
+    private $logoName;
 
     /**
-      * @Vich\UploadableField(mapping="image_uploads", fileNameProperty="photo")
+      * @Vich\UploadableField(mapping="image_uploads", fileNameProperty="logoName")
       * @var File
       */
 
-    private $photoFile;
+    private $logoFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Project::class, mappedBy="client")
@@ -100,14 +100,14 @@ class Client
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getLogoName(): ?string
     {
-        return $this->photo;
+        return $this->logoName;
     }
 
-    public function setPhoto(?string $photo): self
+    public function setLogoName(?string $logoName): self
     {
-        $this->photo = $photo;
+        $this->logoName = $this->name . "_logo";
 
         return $this;
     }
@@ -143,21 +143,21 @@ class Client
     }
 
     /**
-     * Get the value of photoFile
+     * Get the value of logoFile
      */ 
-    public function getPhotoFile()
+    public function getLogoFile()
     {
-        return $this->photoFile;
+        return $this->logoFile;
     }
 
     /**
-     * Set the value of photoFile
+     * Set the value of logoFile
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
      * @return  self
      */ 
-    public function setPhotoFile(File $photoFile = null): self
+    public function setLogoFile(File $logoFile = null): self
     {
-        $this->photoFile = $photoFile;
+        $this->logoFile = $logoFile;
 
         return $this;
     }
