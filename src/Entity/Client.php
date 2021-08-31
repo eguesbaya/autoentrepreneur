@@ -6,9 +6,12 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @Vich\Uploadable
  */
 class Client
 {
@@ -38,6 +41,13 @@ class Client
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
+
+    /**
+      * @Vich\UploadableField(mapping="image_uploads", fileNameProperty="photo")
+      * @var File
+      */
+
+    private $photoFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Project::class, mappedBy="client")
@@ -128,6 +138,26 @@ class Client
                 $project->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of photoFile
+     */ 
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    /**
+     * Set the value of photoFile
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     * @return  self
+     */ 
+    public function setPhotoFile(File $photoFile = null): self
+    {
+        $this->photoFile = $photoFile;
 
         return $this;
     }
