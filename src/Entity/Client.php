@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeImmutable;
+use App\Entity\Project;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Image;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -40,19 +46,30 @@ class Client
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logoName;
+    private ?string $logo = null;
 
     /**
-      * @Vich\UploadableField(mapping="image_uploads", fileNameProperty="logoName")
-      * @var File
-      */
-
+    * @Vich\UploadableField(mapping="image_uploads", fileNameProperty="logo")
+    * @var File|null
+    * @Assert\Image(
+    *     maxSize = "2M",
+    *     mimeTypes = {
+    *              "image/jpg", "image/jpg",
+    *              "image/jpeg", "image/jpeg",
+    *              "image/png", "image/webp"},
+    * )
+    */
     private $logoFile;
 
     /**
      * @ORM\OneToMany(targetEntity=Project::class, mappedBy="client")
      */
     private $projects;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -100,14 +117,14 @@ class Client
         return $this;
     }
 
-    public function getLogoName(): ?string
+    public function getLogo(): ?string
     {
-        return $this->logoName;
+        return $this->logo;
     }
 
-    public function setLogoName(?string $logoName): self
+    public function setLogo(?string $logo): self
     {
-        $this->logoName = $this->name . "_logo";
+        $this->logo = $logo;
 
         return $this;
     }
@@ -145,7 +162,7 @@ class Client
     /**
      * Get the value of logoFile
      */ 
-    public function getLogoFile()
+    public function getLogoFile(): ?File
     {
         return $this->logoFile;
     }
@@ -155,9 +172,24 @@ class Client
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
      * @return  self
      */ 
-    public function setLogoFile(File $logoFile = null): self
+    public function setLogoFile(?File $image = null): Client
     {
-        $this->logoFile = $logoFile;
+        $this->logoFile = $image;
+        if ($image) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAtt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAtt = $updatedAt;
 
         return $this;
     }

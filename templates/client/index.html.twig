@@ -21,7 +21,7 @@
         {% for client in clients %}
             <tr>
                 <td>{{ client.id }}</td>
-                <td>{{ client.logoName }}</td>
+                <td><img src="{{ vich_uploader_asset(client) }}" alt="{{ client.name }}"></td>
                 <td>{{ client.name }}</td>
                 <td>{{ client.type }}</td>
                 <td>{{ client.comment }}</td>
